@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 80;
+const http = require('http');
 
 app.get("/", (req, res) => {
   console.log("hello..");
@@ -12,6 +12,7 @@ app.get("/health-check", (req, res) => {
   res.json({ message: "Server up and running" });
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+const httpServer = http.createServer(app);
+httpServer.listen(process.env.port, () => {
+  console.log(`API is now live on ${process.env.port}`);
 });
